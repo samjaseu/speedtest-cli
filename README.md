@@ -7,7 +7,7 @@ Original repo found under: https://github.com/sivel/speedtest-cli
 ## Installation
 ```
 cd /usr/lib/nagios/plugins
-wget -O check_speedtest https://raw.githubusercontent.com/samjaseu/check-speedtest/master/check-speedtest
+wget -O check_speedtest https://raw.githubusercontent.com/samjaseu/check-speedtest/master/check_speedtest
 chmod +x check_speedtest
 ```
 
