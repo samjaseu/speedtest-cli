@@ -36,8 +36,11 @@ object CheckCommand "check_speedtest" {
     command = [ PluginDir + "/check_speedtest" ]
     arguments += {
         "--icinga2" = {
-            order = 0
             required = true
+        }
+        "--server" = {
+            value = "$speedtest_servers$"
+            repeat_key = true
         }
     }
 }
