@@ -6,7 +6,9 @@ Original repo found under: https://github.com/sivel/speedtest-cli
 
 ## Installation
 ```
-wget -O check-speedtest https://raw.githubusercontent.com/samjaseu/check-speedtest/master/check-speedtest
+cd /usr/lib/nagios/plugins
+wget -O check_speedtest https://raw.githubusercontent.com/samjaseu/check-speedtest/master/check_speedtest
+chmod +x check_speedtest
 ```
 
 
@@ -16,7 +18,7 @@ wget -O check-speedtest https://raw.githubusercontent.com/samjaseu/check-speedte
 
 ### command line
 ```
-$ check-speedtest --icinga2
+$ check_speedtest --icinga2
 Ping: 5.108 ms
 Download: 321.87 Mbit/s
 Upload: 644.90 Mbit/s
@@ -30,13 +32,15 @@ Upload: 644.90 Mbit/s
 
 #### CheckCommand
 ```
-object CheckCommand "command-check-speedtest" {
-    import "plugin-check-command"
-    command = [ PluginDir + "/check-speedtest" ]
+object CheckCommand "check_speedtest" {
+    command = [ PluginDir + "/check_speedtest" ]
     arguments += {
         "--icinga2" = {
-            order = 0
             required = true
+        }
+        "--server" = {
+            value = "$speedtest_servers$"
+            repeat_key = true
         }
     }
 }
@@ -45,7 +49,7 @@ object CheckCommand "command-check-speedtest" {
 #### Service template
 ```
 template Service "Check Speedtest Template" {
-    check_command = "command-check-speedtest"
+    check_command = "check_speedtest"
     notes_url = "https://github.com/samjaseu/check-speedtest"
 }
 ```
