@@ -46,7 +46,7 @@ object CheckCommand "check_speedtest" {
 #### Service template
 ```
 template Service "Check Speedtest Template" {
-    check_command = "command-check-speedtest"
+    check_command = "check_speedtest"
     notes_url = "https://github.com/samjaseu/check-speedtest"
 }
 ```
